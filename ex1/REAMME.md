@@ -1,4 +1,4 @@
-打开P27(如无特殊说明，该项目中的Pxx均指"OS课程设计指南"的对应页数)  
+打开P27，按照《指南》进行
 > 打开Linux终端
 > 输入“dpkg --print-architecture”  
 > 输入“dpkg --print-foreign-architectures”，发现未输出任何东西，判断为系统多架构功未打开  
