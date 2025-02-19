@@ -14,3 +14,4 @@ emmmm，虽然之前用github下载过很多东西，但是还是第一次使用
 注："操作位置"的说明，比如操作2.2-2.2.1-2-(2)，是指如下操作
 “安装32位编译环境与支持库sudo apt-get install build-essential g++-multilib gcc-multilib”
 ![image](https://github.com/user-attachments/assets/d1fbc5e4-ee22-49d0-a261-bd45fb9c18e5)
+<img src="[https://img-blog.csdnimg.cn/2020102116384135.png](https://github.com/user-attachments/assets/d1fbc5e4-ee22-49d0-a261-bd45fb9c18e5)" width="100px">
