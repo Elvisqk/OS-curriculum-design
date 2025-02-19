@@ -11,3 +11,6 @@ emmmm，虽然之前用github下载过很多东西，但是还是第一次使用
 记得安装WSL 2再回到此处  
 注：用《指南》代指《OS课程设计指南(C++)》  
 注：如果我文中出现了p27，p38之类的页数，如无特殊说明，则是指《指南》的对应页数
+注："操作位置"的说明，比如操作2.2-2.2.1-2-(2)，是指如下操作
+“安装32位编译环境与支持库sudo apt-get install build-essential g++-multilib gcc-multilib”
+![image](https://github.com/user-attachments/assets/d1fbc5e4-ee22-49d0-a261-bd45fb9c18e5)
