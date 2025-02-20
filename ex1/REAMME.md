@@ -31,8 +31,8 @@
 # 问题5
 su命令执行失败：Authentication failure  
 找了半天密码，发现我压根没有设置root用户，解决办法：  
-**执行sudo passwd root**
-设置密码
+**执行sudo passwd root**  
+设置密码  
 然后你就可以用su命令了
 # 思考：为什么nachos-3.4.tar.gz一定要安装在/usr/local目录中？
 答：打开code/Makefile.dep，在大约38行左右，查看变量GCCDIR的值，即GCCDIR = /usr/local/mips/bin/decstation-ultrix-  
