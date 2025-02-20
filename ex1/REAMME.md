@@ -18,8 +18,14 @@
 在bin底下执行make clean和make成功，那么就可以继续跟着指南走了  
 发现在lab3和test中执行make会报错，没关系，暂时用不到，lab3会在实验3解决，而test一会指南会解决
 # 问题4
-/usr/local是隐藏文件夹，可以通过命令行寻找
+操作位置：2.3-2.3.1
+(b) cd /usr/local 
+/usr/local是隐藏文件夹，直接找是找不到的，可以通过命令行寻找  
 ![image](https://github.com/user-attachments/assets/a2795046-cf3d-4610-a105-f24b3fc770ce)
+(c) copy file “gcc-2.8.1-mips.tar.gz” to file fold “/usr/local” with cp command. 
+这句话不是命令，
+**先把gcc-2.8.1-mips.tar.gz复制到OS文件夹下，在终端进入OS文件夹**
+**执行命令cp gcc-2.8.1-mips.tar.gz /usr/local**
 # 问题5
 su命令执行失败：Authentication failure  
 找了半天密码，发现我压根没有设置root用户，解决办法：  
