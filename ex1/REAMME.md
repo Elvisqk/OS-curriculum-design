@@ -14,7 +14,7 @@
 操作位置：2.2-2.2.1-3-(3)  
 如果你不知道如何运行make clean，那么记住：在包含Makefile的文件夹下运行，  
 所以现在我在code的每一个包含Makefile的子文件夹中执行make clean和make  
-在bin底下执行make clean和make成功，那么就可以继续跟着指南走了
+在bin底下执行make clean和make成功，那么就可以继续跟着指南走了  
 发现在lab3和test中执行make会报错，没关系，暂时用不到，lab3会在实验3解决，而test一会指南会解决
 # 问题4
 /usr/local是隐藏文件夹，可以通过命令行寻找
