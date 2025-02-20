@@ -31,4 +31,7 @@ Nachos 模拟的CPU基于MIPS架构，执行MIPS指令集，用来执行Nachos�
 成包含MIPS指令集的可执行程序，以便在Nachos系统上运行。  
 Nachos 本身没有提供编译器，其应用程序只能在Linux环境下编程，并在Linux环境下将其编译成基于 MIPS 指令集的应用程序，然后利用 Nachos 提供的工具
 coff2noff 将其转换成Nachos 的应用程序（noff格式）。  
-Nachos 系统提供的交叉编译器gcc-2.8.1-mips.tar.gz 提供的 gcc、g++、as、ld 等工具负责实现该功能。 
+Nachos 系统提供的交叉编译器gcc-2.8.1-mips.tar.gz 提供的 gcc、g++、as、ld 等工具负责实现该功能。  
+个人理解：  
+/usr/local/ 目录是 Linux 系统中用于存放本地安装的软件、程序、库文件等内容的标准位置。  
+这个压缩包包含与 MIPS 架构相关的工具链、编译器、库或模拟器等，将它们放在 /usr/local/ 下，以便系统的其他程序或开发人员可以访问和使用。
