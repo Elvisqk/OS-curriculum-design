@@ -9,3 +9,7 @@
 # 问题2
 下载Nachos，我个人将压缩包“Nachos-3.4-SDU(for lecture).zip”中的三个文件夹，用一个“Nachos”文件夹包了起来，如下  
 ![image](https://github.com/user-attachments/assets/e408ccf1-822a-4699-bdb7-6d63ae65855d)
+# 问题3
+操作位置：2.2-2.2.1-3-(3)  
+如果你不知道如何运行make clean，那么记住：在包含Makefile的项目底下打开终端运行，如下
+![image](https://github.com/user-attachments/assets/457c20f3-a457-4ea3-8302-489bb163514a)
