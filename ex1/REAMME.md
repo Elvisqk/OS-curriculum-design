@@ -26,4 +26,9 @@ su命令执行失败：Authentication failure
 设置密码
 然后你就可以用su命令了
 # 思考：为什么nachos-3.4.tar.gz一定要安装在/usr/local目录中？
-我向chatGPT提问：一个项目要求将名为mips的文件夹装在目录/usr/local/下，请根据文件夹的名字和目录名字推断为什么要将这个文件夹放在该目录下
+答：指南第1页(不计目录)写道：
+Nachos 模拟的CPU基于MIPS架构，执行MIPS指令集，用来执行Nachos的应用程序；因此Nachos 的编译程序应该将Nachos的应用程序（类似于C程序）编译
+成包含MIPS指令集的可执行程序，以便在Nachos系统上运行。  
+Nachos 本身没有提供编译器，其应用程序只能在Linux环境下编程，并在Linux环境下将其编译成基于 MIPS 指令集的应用程序，然后利用 Nachos 提供的工具
+coff2noff 将其转换成Nachos 的应用程序（noff格式）。  
+Nachos 系统提供的交叉编译器gcc-2.8.1-mips.tar.gz 提供的 gcc、g++、as、ld 等工具负责实现该功能。 
