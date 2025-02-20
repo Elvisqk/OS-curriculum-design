@@ -16,28 +16,14 @@
 所以现在我在code的每一个包含Makefile的子文件夹中执行make clean和make  
 在bin底下执行make clean和make成功，那么就可以继续跟着指南走了
 发现在lab3和test中执行make会报错，没关系，暂时用不到，lab3会在实验3解决，而test一会指南会解决
-
-
-
-
-
-
-
-但是在这里code文件夹底下拥有“Makefile.common”和“Makefile.dep”文件，这是一个技巧：  
-**现分别执行如下命令**  
-**make -f Makefile.common clean**  
-**make -f Makefile.common**  
-执行make -f Makefile.common clean命令，得到报错信息如下：  
-Makefile.common:44: ../Makefile.dep: No such file or directory  
-make: *** No rule to make target '../Makefile.dep'.  Stop.  
-这是因为Makefile.common中44行有“../Makefile.dep”  
-也就是它去上级目录寻找Makefile.dep了，但是Makefile.dep是在同级目录的，所以  
-**将Makefile.common中44行的../Makefile.dep改为Makefile.dep**  
-于是make -f Makefile.common clean可以正确执行
-**执行make -f Makefile.common**，得到报错信息如下：  
-\>\>\> Linking arch/unknown-i386-linux/bin/nachos <<<  
-g++  -m32   -o arch/unknown-i386-linux/bin/nachos  
-g++: fatal error: no input files  
-compilation terminated.  
-make: *** [Makefile.common:93: arch/unknown-i386-linux/bin/nachos] Error 1  
-原因是没有找到arch/unknown-i386-linux/bin/nachos
+# 问题4
+/usr/local是隐藏文件夹，可以通过命令行寻找
+![image](https://github.com/user-attachments/assets/a2795046-cf3d-4610-a105-f24b3fc770ce)
+# 问题5
+su命令执行失败：Authentication failure  
+找了半天密码，发现我压根没有设置root用户，解决办法：  
+**执行sudo passwd root**
+设置密码
+然后你就可以用su命令了
+# 思考：为什么nachos-3.4.tar.gz一定要安装在/usr/local目录中？
+我向chatGPT提问：一个项目要求将名为mips的文件夹装在目录/usr/local/下，请根据文件夹的名字和目录名字推断为什么要将这个文件夹放在该目录下
