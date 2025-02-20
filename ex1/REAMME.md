@@ -24,7 +24,7 @@ make: *** No rule to make target '../Makefile.dep'.  Stop.
 **将Makefile.common中44行的../Makefile.dep改为Makefile.dep**  
 于是make -f Makefile.common clean可以正确执行
 **执行make -f Makefile.common**，得到报错信息如下：
->>> Linking arch/unknown-i386-linux/bin/nachos <<<
+/>/>/> Linking arch/unknown-i386-linux/bin/nachos <<<
 g++  -m32   -o arch/unknown-i386-linux/bin/nachos
 g++: fatal error: no input files
 compilation terminated.
