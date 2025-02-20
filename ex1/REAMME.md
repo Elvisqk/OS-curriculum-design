@@ -26,6 +26,8 @@
 这句话不是命令，  
 **先把gcc-2.8.1-mips.tar.gz复制到OS文件夹下，在终端进入OS文件夹**  
 **执行命令cp gcc-2.8.1-mips.tar.gz /usr/local**  
+(d) tar xzvf gcc-2.8.1-mips.tar.gz   
+**执行命令cd /usr/local进入local目录下再执行tar xzvf gcc-2.8.1-mips.tar.gz**
 # 问题5
 su命令执行失败：Authentication failure  
 找了半天密码，发现我压根没有设置root用户，解决办法：  
