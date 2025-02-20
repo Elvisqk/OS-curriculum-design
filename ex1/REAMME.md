@@ -11,5 +11,13 @@
 ![image](https://github.com/user-attachments/assets/e408ccf1-822a-4699-bdb7-6d63ae65855d)
 # 问题3
 操作位置：2.2-2.2.1-3-(3)  
-如果你不知道如何运行make clean，那么记住：在包含Makefile的项目底下打开终端运行，如下
-![image](https://github.com/user-attachments/assets/457c20f3-a457-4ea3-8302-489bb163514a)
+如果你不知道如何运行make clean，那么记住：在包含Makefile的文件夹下运行，  
+但是在这里code文件夹底下拥有“Makefile.common”和“Makefile.dep”文件，这是一个技巧：  
+**现执行如下命令**  
+**make -f Makefile.common clean**  
+**make -f Makefile.common**  
+你执行make -f Makefile.common clean命令，会得到报错信息，这是因为Makefile.common中44行有“../Makefile.dep”  
+也就是它去上级目录寻找Makefile.dep了，但是Makefile.dep是在同级目录的，所以  
+**将Makefile.common中44行的../Makefile.dep改为Makefile.dep**  
+Makefile.common:44: ../Makefile.dep: No such file or directory  
+make: *** No rule to make target '../Makefile.dep'.  Stop.  
