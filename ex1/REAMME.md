@@ -7,8 +7,9 @@
 ![image](https://github.com/user-attachments/assets/253eb207-c32c-4d3b-bd86-6bc24cb8f8e8)
 解决方法：此时我打开了VPN，并在终端执行命令sudo apt update，再次执行“sudo apt-get install build-essential g++-multilib gcc-multilib”，成功执行完毕
 # 问题2
-下载Nachos，我个人将压缩包“Nachos-3.4-SDU(for lecture).zip”中的三个文件夹，用一个“Nachos”文件夹包了起来，如下  
-![image](https://github.com/user-attachments/assets/0e768e4a-1ff0-4cab-a64f-08e2b0b6d311)
+在用户文件夹底下，我的是“zhang”，建立OS目录，在OS目录底下，建立nachos-3.4目录  
+下载Nachos，我个人将压缩包“Nachos-3.4-SDU(for lecture).zip”中的三个文件夹，用“nachos-3.4”文件夹包了起来，如下  
+![image](https://github.com/user-attachments/assets/f36dda80-7730-45b5-8e49-8b92d797f96e)
 
 # 问题3
 操作位置：2.2-2.2.1-3-(3)  
