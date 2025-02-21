@@ -35,13 +35,16 @@
 **执行命令cd /usr/local进入local目录下再执行tar xzvf gcc-2.8.1-mips.tar.gz**
 # 问题5
 操作位置：2.5  
-在c++example目录下执行make命令，得到报错  
+在c++example目录下**执行make命令**，得到报错：  
 ![image](https://github.com/user-attachments/assets/dc921de4-957b-4300-92ec-d5feed94f0ad)  
-解决方案：讲inheritstack.cc和templatestack.cc中的<iostream.h>改为<iostream>
-再次执行，得到报错：
-![image](https://github.com/user-attachments/assets/2bd5ab8f-7d50-475a-82a7-99d5f39aa6da)
-解决方案，在inheritstack.cc和templatestack.cc中加入using namespace std;
-建议：有一个warning，可以将copyright.h中的char* 前加上const来解决
+**解决方案：将inheritstack.cc、templatestack.cc和stack.cc中的<iostream.h>改为<iostream>**  
+**再次执行make**，得到报错：  
+![image](https://github.com/user-attachments/assets/2bd5ab8f-7d50-475a-82a7-99d5f39aa6da)  
+**解决方案，在inheritstack.cc、templatestack.cc和stack.cc中加入using namespace std;**  
+建议：有一个warning，可以将copyright.h中的char* 前加上const来解决  
+**执行gdb stack**，得到报错：  
+![image](https://github.com/user-attachments/assets/47057a24-6c5f-4bb0-baaa-be1cc227181e)  
+**解决方案：执行sudo apt install gdb**
 # 思考：为什么nachos-3.4.tar.gz一定要安装在/usr/local目录中？
 答：打开code/Makefile.dep，在大约38行左右，查看变量GCCDIR的值，即GCCDIR = /usr/local/mips/bin/decstation-ultrix-  
 交叉编译器用于对../test目录下的Nachos应用程序（如sort.c）进行编译，经转换后会生成Nachos可执行的文件sort.noff：  
