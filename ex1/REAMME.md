@@ -37,7 +37,7 @@
 操作位置：2.5  
 在c++example目录下**执行make命令**，得到报错：  
 ![image](https://github.com/user-attachments/assets/dc921de4-957b-4300-92ec-d5feed94f0ad)  
-**解决方案：将inheritstack.cc、templatestack.cc和stack.cc中的<iostream.h>改为<iostream>**  
+**解决方案：将inheritstack.cc、templatestack.cc和stack.cc中的<iostream.h>改为/<iostream>**  
 **再次执行make**，得到报错：  
 ![image](https://github.com/user-attachments/assets/2bd5ab8f-7d50-475a-82a7-99d5f39aa6da)  
 **解决方案，在inheritstack.cc、templatestack.cc和stack.cc中加入using namespace std;**  
