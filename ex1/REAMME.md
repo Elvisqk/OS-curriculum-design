@@ -33,10 +33,7 @@
 **执行命令cp gcc-2.8.1-mips.tar.gz /usr/local**  
 (d) tar xzvf gcc-2.8.1-mips.tar.gz   
 **执行命令cd /usr/local进入local目录下再执行tar xzvf gcc-2.8.1-mips.tar.gz**
-# 问题5
-我在项目代码中增加了大量的注释以便我理解这个项目，  
-大部分注释均是从指南中copy的文本  
-少部分注释以“注：”开头，这是我个人的理解，自己写的文本
+
 # 思考：为什么nachos-3.4.tar.gz一定要安装在/usr/local目录中？
 答：打开code/Makefile.dep，在大约38行左右，查看变量GCCDIR的值，即GCCDIR = /usr/local/mips/bin/decstation-ultrix-  
 交叉编译器用于对../test目录下的Nachos应用程序（如sort.c）进行编译，经转换后会生成Nachos可执行的文件sort.noff：  
