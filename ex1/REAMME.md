@@ -70,7 +70,9 @@ p/print/d/display ——输出程序中变量的值
 info reg ——输出当前所有寄存器内容
 其余gdb命令随用随查
 # p41页回答问题
-**注意注意：虽然这些问题是在2.6中给出，但是2.7给出了这些答案的解决方法，很详细，推荐你去看懂并执行，我这里省去了解释，你可能觉得执行不通**
+**注意注意：虽然这些问题是在2.6中给出，但是2.7给出了这些答案的解决方法，很详细，推荐你去看懂并执行**
+我通过跟着指南操作得到了以下地址，并没有遇到什么需要补充的问题(不过看懂指南确实花了我不少力气)  
+经过我反复实践，发现(1)(2)
 (1)三种方法：  
 ①info address func可以找到函数func()的地址  
 ②disassemble func可以通过反汇编查看代码并看到func()地址  
@@ -84,13 +86,14 @@ info reg ——输出当前所有寄存器内容
 Ⅰ.the main thread of the Nachos：地址为0x56563ca0  
 Ⅱ.the forked thread created by the main thread：的地址为0x56563d00  
 (3)步骤(输入命令)：break SWITCH：在SWICH入口处打断点  
-run：运行到SWITCH函数，此时原函数的返回地址就在栈顶  
-backtrace：查看栈中的内容  
-x /4xw $esp：若地址是32位，则可以找到返回地址  
-x /4xw $rsp：若地址是64位，则可以找到返回地址  
 disassemble address：利用反汇编检验地址  
-Ⅰ.  
-Ⅱ.  
-(4)
-Ⅰ.  
-Ⅱ.  
+Ⅰ.当主线程第一次运行 SWITCHO)函数，CPU返回的地址是0x56559e72  
+Ⅱ.该地址对应程序的ThreadRoot ()  
+第一次调用SWITCH()，是从主线程(main)切换到新建的子线程（forked thread），  
+因此第一次调用SWITCH，其返回值是新建子线程（forked thread）的入口ThreadRoot()，  
+即切换到ThreadRoot()开始执行新建的子线程。  
+(4)该地址对应程序的Scheduler::Run()  
+Ⅰ.当调用Fork0新建的线程首次运行SWITCHO函数时，CPU返回的地址是0x56556a20  
+Ⅱ.子线程开始执行后，后续子线程与主线程main 发生的上下文切换都是从上次被  
+中断的地方开始执行，即Scheduler::Run()中语句SWITCH(oldThread, nextThread)之后，  
+因此断点地址都是相同的，即后续SWITCH的返回值都是相同的。  
