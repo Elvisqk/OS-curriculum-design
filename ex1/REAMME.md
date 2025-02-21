@@ -41,7 +41,7 @@
 **再次执行make**，得到报错：  
 ![image](https://github.com/user-attachments/assets/2bd5ab8f-7d50-475a-82a7-99d5f39aa6da)  
 **解决方案，在inheritstack.cc、templatestack.cc和stack.cc中加入using namespace std;**  
-建议：有一个warning，可以将copyright.h中的char* 前加上const来解决  
+建议：有一个warning，可以将copyright.h中25行的char* 前加上const来解决  
 **执行gdb stack**，得到报错：  
 ![image](https://github.com/user-attachments/assets/47057a24-6c5f-4bb0-baaa-be1cc227181e)  
 **解决方案：执行sudo apt install gdb**
