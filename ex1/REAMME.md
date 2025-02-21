@@ -70,11 +70,12 @@ p/print/d/display ——输出程序中变量的值
 info reg ——输出当前所有寄存器内容
 其余gdb命令随用随查
 # p41页回答问题
+**注意注意：虽然这些问题是在2.6中给出，但是2.7给出了这些答案的解决方法，很详细，推荐你去看懂并执行，我这里省去了解释，你可能觉得执行不通**
 (1)三种方法：  
 ①info address func可以找到函数func()的地址  
 ②disassemble func可以通过反汇编查看代码并看到func()地址  
 ③b func可以在函数打断点，系统会提示断点地址(即函数地址)  
-步骤：  
+步骤(由指南总结而得)：  
 打开终端  
 cd OS/nachos-3.4/code/threads  
 make  
@@ -86,8 +87,30 @@ gdb ./nachos
 Ⅳ.ThreadRoot()的地址为0x4e72  
 (2)info threads可以找到所有线程的TID以及地址  
 thread 2可以切换到线程ID为2的线程，bt可以查看线程的调用堆栈，call pthread_self()可以查看当前线程的线程ID  
-Ⅰ.the main thread of the Nachos：地址为  
-Ⅱ.the forked thread created by the main thread：的地址为  
+步骤(由指南总结而得)：  
+打开终端  
+cd OS/nachos-3.4/code/threads  
+make  
+gdb ./nachos  
+b Initialize  
+r  
+不断执行l查看代码，直到看到语句“currentThread->setStatus(RUNNING)”的行数num(大约为150行，我加过注释，为155，行数不相同)  
+b num ——num为currentThread->setStatus(RUNNING)的行数  
+c  
+p currentThread  
+看到一个地址，即为当前主线程的地址  
+再次打开终端  
+cd OS/nachos-3.4/code/threads  
+make  
+gdb ./nachos  
+b ThreadTest  
+r  
+不断执行l查看代码，直到看到语句“SimpleThread(0)”的行数num
+b num  
+c
+p t
+Ⅰ.the main thread of the Nachos：地址为0x56563ca0  
+Ⅱ.the forked thread created by the main thread：的地址为0x56563d00  
 (3)步骤(输入命令)：break SWITCH：在SWICH入口处打断点  
 run：运行到SWITCH函数，此时原函数的返回地址就在栈顶  
 backtrace：查看栈中的内容  
