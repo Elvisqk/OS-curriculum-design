@@ -23,7 +23,7 @@
 找了半天密码，发现我压根没有设置root用户，解决办法：  
 **执行sudo passwd root**  
 设置密码  
-然后你就可以用su命令了
+然后你就可以用su命令了  
 (b) cd /usr/local  
 /usr/local是隐藏文件夹，直接找是找不到的，可以通过命令行寻找  
 ![image](https://github.com/user-attachments/assets/a2795046-cf3d-4610-a105-f24b3fc770ce)  
