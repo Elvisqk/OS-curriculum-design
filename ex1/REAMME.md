@@ -33,6 +33,14 @@
 **执行命令cp gcc-2.8.1-mips.tar.gz /usr/local**  
 (d) tar xzvf gcc-2.8.1-mips.tar.gz   
 **执行命令cd /usr/local进入local目录下再执行tar xzvf gcc-2.8.1-mips.tar.gz**
+# 问题5
+操作位置：2.5  
+在c++example目录下执行make命令，得到报错  
+![image](https://github.com/user-attachments/assets/dc921de4-957b-4300-92ec-d5feed94f0ad)  
+解决方案：讲inheritstack.cc和templatestack.cc中的<iostream.h>改为<iostream>
+再次执行，得到报错：
+![image](https://github.com/user-attachments/assets/2bd5ab8f-7d50-475a-82a7-99d5f39aa6da)
+解决方案，在inheritstack.cc和templatestack.cc中加入using namespace std;
 
 # 思考：为什么nachos-3.4.tar.gz一定要安装在/usr/local目录中？
 答：打开code/Makefile.dep，在大约38行左右，查看变量GCCDIR的值，即GCCDIR = /usr/local/mips/bin/decstation-ultrix-  
