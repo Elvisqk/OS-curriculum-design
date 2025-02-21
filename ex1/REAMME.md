@@ -33,25 +33,6 @@
 **执行命令cp gcc-2.8.1-mips.tar.gz /usr/local**  
 (d) tar xzvf gcc-2.8.1-mips.tar.gz   
 **执行命令cd /usr/local进入local目录下再执行tar xzvf gcc-2.8.1-mips.tar.gz**
-# 问题5
-操作位置：2.5  
-在c++example目录下**执行make命令**，得到报错：  
-![image](https://github.com/user-attachments/assets/dc921de4-957b-4300-92ec-d5feed94f0ad)  
-**解决方案：将inheritstack.cc、templatestack.cc和stack.cc中的<iostream.h>改为\<iostream>**  
-**再次执行make**，得到报错：  
-![image](https://github.com/user-attachments/assets/2bd5ab8f-7d50-475a-82a7-99d5f39aa6da)  
-**解决方案，在inheritstack.cc、templatestack.cc和stack.cc中加入using namespace std;**  
-建议：有一个warning，可以将copyright.h中25行的char* 前加上const来解决  
-**执行gdb stack**，得到报错：  
-![image](https://github.com/user-attachments/assets/47057a24-6c5f-4bb0-baaa-be1cc227181e)  
-**解决方案：执行sudo apt install gdb**
-# gdb记录
-l ——展示10行代码  
-b 129 ——在129行打一个断点
-b func ——在名为func的函数上打一个断点(进入函数即遇到断点)
-r ——持续运行直到遇到断点或结束
-n ——逐语句跟踪程序
-
 # 思考：为什么nachos-3.4.tar.gz一定要安装在/usr/local目录中？
 答：打开code/Makefile.dep，在大约38行左右，查看变量GCCDIR的值，即GCCDIR = /usr/local/mips/bin/decstation-ultrix-  
 交叉编译器用于对../test目录下的Nachos应用程序（如sort.c）进行编译，经转换后会生成Nachos可执行的文件sort.noff：  
@@ -65,3 +46,38 @@ Nachos 系统提供的交叉编译器gcc-2.8.1-mips.tar.gz 提供的 gcc、g++�
 个人理解：  
 /usr/local/ 目录是 Linux 系统中用于存放本地安装的软件、程序、库文件等内容的标准位置。  
 这个压缩包包含与 MIPS 架构相关的工具链、编译器、库或模拟器等，将它们放在 /usr/local/ 下，以便系统的其他程序或开发人员可以访问和使用。
+# 问题5
+操作位置：2.5  
+在c++example目录下**执行make命令**，得到报错：  
+![image](https://github.com/user-attachments/assets/dc921de4-957b-4300-92ec-d5feed94f0ad)  
+**解决方案：将inheritstack.cc、templatestack.cc和stack.cc中的<iostream.h>改为\<iostream>**  
+**再次执行make**，得到报错：  
+![image](https://github.com/user-attachments/assets/2bd5ab8f-7d50-475a-82a7-99d5f39aa6da)  
+**解决方案，在inheritstack.cc、templatestack.cc和stack.cc中加入using namespace std;**  
+建议：有一个warning，可以将copyright.h中25行的char* 前加上const来解决  
+**执行gdb stack**，得到报错：  
+![image](https://github.com/user-attachments/assets/47057a24-6c5f-4bb0-baaa-be1cc227181e)  
+**解决方案：执行sudo apt install gdb**
+# gdb记录
+l/list ——展示10行代码  
+b/break 129 ——在129行打一个断点  
+b/break func ——在名为func的函数上打一个断点(进入函数即遇到断点)  
+r/run ——持续运行直到遇到断点或结束  
+n/next ——逐语句跟踪程序  
+s/step ——逐条汇编指令进行  
+p/print/d/display ——输出程序中变量的值
+# p41页回答问题
+(1)  
+Ⅰ  
+Ⅱ  
+Ⅲ  
+Ⅳ  
+(2)  
+Ⅰ  
+Ⅱ  
+(3)  
+I  
+Ⅱ  
+(4)
+Ⅰ  
+Ⅱ  
