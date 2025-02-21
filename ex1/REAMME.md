@@ -83,7 +83,7 @@ info reg ——输出当前所有寄存器内容
 Ⅲ.ThreadFinish()的地址为0x2ff6  
 Ⅳ.ThreadRoot()的地址为0x4e72  
 (2)  
-简述指南：分别找到主线程和其他线程被创建的地方，打断点从相关变量的值中获取
+简述指南：分别找到主线程和其他线程被创建的地方，打断点从相关变量的值中获取  
 Ⅰ.the main thread of the Nachos：地址为0x56563ca0  
 Ⅱ.the forked thread created by the main thread：的地址为0x56563d00  
 (3)步骤(输入命令)：break SWITCH：在SWICH入口处打断点  
