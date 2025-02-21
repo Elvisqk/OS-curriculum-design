@@ -79,7 +79,7 @@ info reg ——输出当前所有寄存器内容
 cd OS/nachos-3.4/code/threads  
 make  
 gdb ./nachos  
-此时运用三种方法任意之一均可得到
+此时运用三种方法任意之一均可得到  
 Ⅰ.InterruptEnable()的地址为0x3021  
 Ⅱ. SimpleThread()的地址为0x326f  
 Ⅲ.ThreadFinish()的地址为0x2ff6  
