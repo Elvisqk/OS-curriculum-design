@@ -86,15 +86,15 @@ info reg ——输出当前所有寄存器内容
 简述指南：分别找到主线程和其他线程被创建的地方，打断点从相关变量的值中获取  
 Ⅰ.the main thread of the Nachos：地址为0x56563ca0  
 Ⅱ.the forked thread created by the main thread：的地址为0x56563d00  
-(3)步骤(输入命令)：break SWITCH：在SWICH入口处打断点  
-disassemble address：利用反汇编检验地址  
+(3)  
 Ⅰ.当主线程第一次运行 SWITCHO)函数，CPU返回的地址是0x56559e72  
 Ⅱ.该地址对应程序的ThreadRoot ()  
 第一次调用SWITCH()，是从主线程(main)切换到新建的子线程（forked thread），  
 因此第一次调用SWITCH，其返回值是新建子线程（forked thread）的入口ThreadRoot()，  
 即切换到ThreadRoot()开始执行新建的子线程。  
-(4)该地址对应程序的Scheduler::Run()  
+(4)  
 Ⅰ.当调用Fork0新建的线程首次运行SWITCHO函数时，CPU返回的地址是0x56556a20  
-Ⅱ.子线程开始执行后，后续子线程与主线程main 发生的上下文切换都是从上次被  
+Ⅱ.该地址对应程序的Scheduler::Run()  
+子线程开始执行后，后续子线程与主线程main 发生的上下文切换都是从上次被  
 中断的地方开始执行，即Scheduler::Run()中语句SWITCH(oldThread, nextThread)之后，  
 因此断点地址都是相同的，即后续SWITCH的返回值都是相同的。  
