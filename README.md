@@ -11,9 +11,7 @@ emmmm，虽然之前用github下载过很多东西，但是还是第一次尝试
 所以我要在WSL中进行全部操作，如果你想完全仿照我的操作进行，记得安装WSL 2再回到此处  
 注：用《指南》代指《OS课程设计指南(C++)》  
 注：如果我文中出现了p27，p38之类的页数，如无特殊说明，则是指《指南》的对应页数  
-注：我在代码中增加了大量的注释以便我理解Nachos，  
-    大部分注释均是从指南中copy的文本  
-\qquad 少部分注释以“注：”开头，这是我个人的理解，自己写的文本  
+注：我在代码中增加了大量的注释以便我理解Nachos，大部分注释均是从指南中copy的文本，少部分注释以“注：”开头，这是我个人的理解，自己写的文本  
 注："操作位置"的说明，比如操作2.2-2.2.1-2-(2)，是指如下操作
 “安装32位编译环境与支持库sudo apt-get install build-essential g++-multilib gcc-multilib”  
 <img src="https://github.com/user-attachments/assets/d1fbc5e4-ee22-49d0-a261-bd45fb9c18e5" width="500px">
