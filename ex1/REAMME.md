@@ -19,6 +19,11 @@
 发现在lab3和test中执行make会报错，没关系，暂时用不到，lab3会在实验3解决，而test一会指南会解决
 # 问题4
 操作位置：2.3-2.3.1  
+(a)su命令执行失败：Authentication failure  
+找了半天密码，发现我压根没有设置root用户，解决办法：  
+**执行sudo passwd root**  
+设置密码  
+然后你就可以用su命令了
 (b) cd /usr/local  
 /usr/local是隐藏文件夹，直接找是找不到的，可以通过命令行寻找  
 ![image](https://github.com/user-attachments/assets/a2795046-cf3d-4610-a105-f24b3fc770ce)  
@@ -29,11 +34,9 @@
 (d) tar xzvf gcc-2.8.1-mips.tar.gz   
 **执行命令cd /usr/local进入local目录下再执行tar xzvf gcc-2.8.1-mips.tar.gz**
 # 问题5
-su命令执行失败：Authentication failure  
-找了半天密码，发现我压根没有设置root用户，解决办法：  
-**执行sudo passwd root**  
-设置密码  
-然后你就可以用su命令了
+我在项目代码中增加了大量的注释以便我理解这个项目，  
+大部分注释均是从指南中copy的文本  
+少部分注释以“注：”开头，这是我个人的理解，自己写的文本
 # 思考：为什么nachos-3.4.tar.gz一定要安装在/usr/local目录中？
 答：打开code/Makefile.dep，在大约38行左右，查看变量GCCDIR的值，即GCCDIR = /usr/local/mips/bin/decstation-ultrix-  
 交叉编译器用于对../test目录下的Nachos应用程序（如sort.c）进行编译，经转换后会生成Nachos可执行的文件sort.noff：  
