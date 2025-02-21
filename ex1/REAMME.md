@@ -45,6 +45,13 @@
 **执行gdb stack**，得到报错：  
 ![image](https://github.com/user-attachments/assets/47057a24-6c5f-4bb0-baaa-be1cc227181e)  
 **解决方案：执行sudo apt install gdb**
+# gdb记录
+l ——展示10行代码  
+b 129 ——在129行打一个断点
+b func ——在名为func的函数上打一个断点(进入函数即遇到断点)
+r ——持续运行直到遇到断点或结束
+n ——逐语句跟踪程序
+
 # 思考：为什么nachos-3.4.tar.gz一定要安装在/usr/local目录中？
 答：打开code/Makefile.dep，在大约38行左右，查看变量GCCDIR的值，即GCCDIR = /usr/local/mips/bin/decstation-ultrix-  
 交叉编译器用于对../test目录下的Nachos应用程序（如sort.c）进行编译，经转换后会生成Nachos可执行的文件sort.noff：  
