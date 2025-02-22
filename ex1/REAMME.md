@@ -6,9 +6,9 @@
 操作位置：2.2-2.2.1-2-(2)  
 输入“sudo apt-get install build-essential g++-multilib gcc-multilib”，遇到报错信息如下  
 ![image](https://github.com/user-attachments/assets/0a4a671e-fa70-4389-a13c-2bd2f98d839f)  
-我讲报错信息丢给chatGPT，得到了如下反馈  
+我将报错信息丢给chatGPT，得到了如下反馈  
 ![image](https://github.com/user-attachments/assets/253eb207-c32c-4d3b-bd86-6bc24cb8f8e8)
-解决方法：此时我打开了VPN，并在终端执行命令sudo apt update，再次执行“sudo apt-get install build-essential g++-multilib gcc-multilib”，成功执行完毕
+解决方法：我打开了VPN，并在终端执行命令sudo apt update，再次执行“sudo apt-get install build-essential g++-multilib gcc-multilib”，成功执行完毕
 # 问题2
 在用户文件夹底下，我的是“zhang”，建立OS目录，在OS目录底下，建立nachos-3.4目录  
 下载Nachos，我个人将压缩包“Nachos-3.4-SDU(for lecture).zip”中的三个文件夹，用“nachos-3.4”文件夹包了起来，如下  
@@ -26,9 +26,9 @@
 找了半天密码，发现我压根没有设置root用户，解决办法：  
 **执行sudo passwd root**  
 设置密码  
-然后你就可以用su命令了  
+然后就可以用su命令了  
 (b) cd /usr/local  
-/usr/local是隐藏文件夹，直接找是找不到的，可以通过命令行寻找  
+由于权限问题，想要不用命令行，直接复制压缩包到该文件夹下是没有权限的，/usr/local可以通过命令行寻找  
 ![image](https://github.com/user-attachments/assets/a2795046-cf3d-4610-a105-f24b3fc770ce)  
 (c) copy file “gcc-2.8.1-mips.tar.gz” to file fold “/usr/local” with cp command.  
 这句话不是命令，  
@@ -73,7 +73,7 @@ p/print/d/display ——输出程序中变量的值
 info reg ——输出当前所有寄存器内容
 其余gdb命令随用随查
 # p41页回答问题
-**注意注意：虽然这些问题是在2.6中给出，但是2.7给出了这些答案的解决方法，很详细，推荐你去看懂并执行**  
+**注意注意：虽然这些问题是在2.6中给出，但是2.7给出了这些答案的解决方法，很详细，推荐去看懂并执行**  
 我通过跟着指南操作得到了以下地址，并没有遇到什么需要补充的问题(不过看懂指南确实花了我不少力气)  
 经过我反复实践，发现这些问题得到的地址不会改变  
 不过我得到的地址与指南不同，推测可能是所用虚拟机不同等原因  
