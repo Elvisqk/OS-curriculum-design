@@ -1,4 +1,7 @@
-打开P27，按照《指南》进行
+打开P27，按照《指南》进行  
+注："操作位置"的说明，比如操作2.2-2.2.1-2-(2)，是指如下操作
+“安装32位编译环境与支持库sudo apt-get install build-essential g++-multilib gcc-multilib”  
+<img src="https://github.com/user-attachments/assets/d1fbc5e4-ee22-49d0-a261-bd45fb9c18e5" width="500px">
 # 问题1
 操作位置：2.2-2.2.1-2-(2)  
 输入“sudo apt-get install build-essential g++-multilib gcc-multilib”，遇到报错信息如下  
