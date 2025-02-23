@@ -1,0 +1,41 @@
+ifndef MAKEFILE_THREADS_LOCAL
+define MAKEFILE_THREADS_LOCAL
+yes
+endef
+
+
+SFILES = switch$(HOST_LINUX).s
+
+
+# If you add new files, you need to add them to CCFILES,
+# you can define CFILES if you choose to make .c files instead.
+
+CCFILES = main.cc\
+	list.cc\
+	scheduler.cc\
+	synch.cc\
+	synchlist.cc\
+	system.cc\
+	thread.cc\
+	utility.cc\
+	threadtest.cc\
+	synchtest.cc\
+	interrupt.cc\
+	sysdep.cc\
+	stats.cc\
+	timer.cc
+
+INCPATH += -I../lab2 -I../threads -I../machine
+# INCPATH += -I- -I../lab2 -I../threads -I../machine
+DEFINES += -DTHREADS
+#$(warning $(DEFINES)) 
+
+endif # MAKEFILE_THREADS_LOCAL
+# 相比于threads中的Makefile.local进行的改动：
+# 多了28行	：INCPATH += -I../lab2 -I../threads -I../machine
+# 多了29行	：//INCPATH += -I- -I../lab2 -I../threads -I../machine
+# 少了		：INCPATH += -I../threads -I../machine
+# 多了31行	：#$(warning $(DEFINES))
+#
+# 对于改动的解释：
+# 在INCPATH中，将-I../lab2放在-I../threads前，以便编译器首先从查找lab2 中查找所需要的头文件。
