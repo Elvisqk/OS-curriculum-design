@@ -20,7 +20,7 @@ extern "C" {
 #include "copyright.h"
 #include "list.h"
 
-//ListElement* NULL = 0;
+ListElement* NULL = 0;//原为const int NULL = 0;
 #define NULL 0
 
 

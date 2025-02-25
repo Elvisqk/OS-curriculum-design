@@ -4,5 +4,5 @@ arch/unknown-i386-linux/depends/scheduler.d arch/unknown-i386-linux/objects/sche
  ../threads/thread.h ../threads/system.h ../machine/interrupt.h \
  ../threads/list.h ../machine/stats.h ../machine/timer.h \
  ../threads/utility.h ../lab5/filesys.h ../lab5/openfile.h \
- ../userprog/bitmap.h ../lab5/openfile.h ../lab5/synchdisk.h \
+ ../userprog/bitmap.h ../lab5/openfile.h ../filesys/synchdisk.h \
  ../machine/disk.h ../threads/synch.h

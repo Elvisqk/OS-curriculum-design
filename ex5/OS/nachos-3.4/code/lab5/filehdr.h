@@ -37,9 +37,9 @@
 
 class FileHeader {
   public:
-    FileHeader();// 新增函数
+    FileHeader();// 新增函数 FileHeader函数的构造
 
-    bool Allocate(BitMap *freeMap, int fileSize, int incrementBytes);// 新增函数
+    bool Allocate(BitMap *freeMap, int fileSize, int incrementBytes);// 新增代码
     // Allocate的重载
 
     bool Allocate(BitMap *bitMap, int fileSize);// Initialize a file header, 

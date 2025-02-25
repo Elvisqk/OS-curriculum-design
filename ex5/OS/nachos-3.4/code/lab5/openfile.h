@@ -52,11 +52,10 @@ class OpenFile {
 		}
 
     int Length() { Lseek(file, 0, 2); return Tell(file); }
-    void WriteBack();
+
   private:
     int file;
     int currentOffset;
-	int hdrSector;
 };
 
 #else // FILESYS
@@ -86,11 +85,11 @@ class OpenFile {
 					// file (this interface is simpler 
 					// than the UNIX idiom -- lseek to 
 					// end of file, tell, lseek back 
-	void WriteBack();// 新增函数
+	void WriteBack();// 新增代码
   private:
     FileHeader *hdr;			// Header for this file 
     int seekPosition;			// Current position within the file
-	int hdrSector;
+	int hdrSector;// 新增代码
 };
 
 #endif // FILESYS

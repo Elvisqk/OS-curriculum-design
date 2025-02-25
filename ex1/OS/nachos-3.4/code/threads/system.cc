@@ -136,45 +136,33 @@ Initialize(int argc, char **argv)
 
     DebugInit(debugArgs);			// initialize DEBUG messages
     stats = new Statistics();			// collect statistics
-    // 初始化系统统计数据，如寻道时间、系统开始计时等；
     interrupt = new Interrupt;			// start up interrupt handling
-    // 初始化中断控制器；
     scheduler = new Scheduler();		// initialize the ready queue
-    // 初始化调度程序，创建就绪队列；
-    if (randomYield){				// start the timer (if needed)
-        // 如果运行时携带参数-rs，初始化定时器，实现时间片抢先调度
-        timer = new Timer(TimerInterruptHandler, 0, randomYield);
-    }
+    if (randomYield)				// start the timer (if needed)
+	timer = new Timer(TimerInterruptHandler, 0, randomYield);
 
     threadToBeDestroyed = NULL;
 
     // We didn't explicitly allocate the current thread we are running in.
     // But if it ever tries to give up the CPU, we better have a Thread
     // object to save its state. 
-    currentThread = new Thread("main");
+    currentThread = new Thread("main");		
     currentThread->setStatus(RUNNING);
-    // 创建主线程main，并作为当前运行的线程；
-    // 注：注意这两个函数，我觉得非常重要，创建线程和设置线程状态，后续绝对会用
 
-    interrupt->Enable();// 允许响应中断
+    interrupt->Enable();
     CallOnUserAbort(Cleanup);			// if user hits ctl-C
-    // 如果在执行过程中，按下ctrl+c，则清除所有设备，退出Nachos；
-
-// 对于实验6、7、8，初始化CPU；
-#ifdef USER_PROGRAM 
+    
+#ifdef USER_PROGRAM
     machine = new Machine(debugUserProg);	// this must come first
 #endif
-// 注：当我们进行到实验6、7、8时，需要我们自己define USER_PROGRAM，并实现函数
 
-// 对于实验4、5，初始化硬盘与文件系统；
-#ifdef FILESYS  
+#ifdef FILESYS
     synchDisk = new SynchDisk("DISK");
 #endif
 
 #ifdef FILESYS_NEEDED
     fileSystem = new FileSystem(format);
 #endif
-// 注：当我们进行到实验4、5时，需要我们自己define FILESYS和FILESYS_NEEDED，并实现函数
 
 #ifdef NETWORK
     postOffice = new PostOffice(netname, rely, order, 10);

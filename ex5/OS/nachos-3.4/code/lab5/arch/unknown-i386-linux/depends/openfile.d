@@ -5,4 +5,4 @@ arch/unknown-i386-linux/depends/openfile.d arch/unknown-i386-linux/objects/openf
  ../threads/thread.h ../threads/scheduler.h ../threads/list.h \
  ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
  ../machine/timer.h ../lab5/filesys.h ../lab5/openfile.h \
- ../lab5/synchdisk.h ../threads/synch.h
+ ../filesys/synchdisk.h ../threads/synch.h

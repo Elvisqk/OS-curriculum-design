@@ -29,7 +29,7 @@ OpenFile::OpenFile(int sector)
     hdr = new FileHeader;
     hdr->FetchFrom(sector);
     seekPosition = 0;
-    hdrSector=sector;//打开文件的文件头所在的扇区号
+    hdrSector=sector;//新增代码 打开文件的文件头所在的扇区号
 }
 
 //----------------------------------------------------------------------
@@ -144,25 +144,21 @@ OpenFile::ReadAt(char *into, int numBytes, int position)
 int
 OpenFile::WriteAt(char *from, int numBytes, int position)
 {
-    //int fileLength = hdr->FileLength();
+    int fileLength = hdr->FileLength();
     int i, firstSector, lastSector, numSectors;
     bool firstAligned, lastAligned;
     char *buf;
-    /*约束1
+    
+    /*注释代码 原约束1
     if ((numBytes <= 0) || (position >= fileLength))
-	return 0;				// check request
-    */
-    int fileLength = hdr->FileLength(); 
-        //第一次调用返回值是从硬盘读出的文件头中的值， 
-        //后续的每次调用都是获取的我们重载的 
-        //FileHeader::Allocate()中修改的值（numBytes）
-    if((numBytes<=0)||(position>fileLength))// 约束1
+	return 0;				// check request*/
+    if((numBytes<=0)||(position>fileLength))//新增代码2行 新约束1
     return -1;
-    /*约束2
+
+    /*注释代码 原约束2
     if ((position + numBytes) > fileLength)
-	numBytes = fileLength - position;
-    */
-    if ((position + numBytes) > fileLength) {  //约束 2 
+	numBytes = fileLength - position;*/
+    if ((position + numBytes) > fileLength) {//新增代码10行 新约束 2 
         int incrementBytes = (position + numBytes) - fileLength; 
         BitMap *freeBitMap = fileSystem-> getBitMap();//自己实现
         bool hdrRet; 
@@ -173,6 +169,7 @@ OpenFile::WriteAt(char *from, int numBytes, int position)
         fileSystem-> setBitMap(freeBitMap); //自己实现 
     } 
     // OpenFile::WriteAt()中的后续代码不需修改，保持不变
+
     DEBUG('f', "Writing %d bytes at %d, from file of length %d.\n", 	
 			numBytes, position, fileLength);
 
@@ -214,6 +211,7 @@ OpenFile::Length()
     return hdr->FileLength(); 
 }
 
+//新增代码4行，实现WriteBack
 void 
 OpenFile::WriteBack() {
    hdr-> WriteBack(hdrSector);

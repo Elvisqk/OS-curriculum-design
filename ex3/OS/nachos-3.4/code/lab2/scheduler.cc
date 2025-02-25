@@ -95,12 +95,12 @@ Scheduler::Run (Thread *nextThread)
 #ifdef USER_PROGRAM			// ignore until running user programs 
     if (currentThread->space != NULL) {	// if this thread is a user program,
         currentThread->SaveUserState(); // save the user's CPU registers
-	    currentThread->space->SaveState();
+	currentThread->space->SaveState();
     }
 #endif
     
     oldThread->CheckOverflow();		    // check if the old thread
-					                    // had an undetected stack overflow
+					    // had an undetected stack overflow
 
     currentThread = nextThread;		    // switch to the next thread
     currentThread->setStatus(RUNNING);      // nextThread is now running
@@ -108,8 +108,7 @@ Scheduler::Run (Thread *nextThread)
     DEBUG('t', "Switching from thread \"%s\" to thread \"%s\"\n",
 	  oldThread->getName(), nextThread->getName());
     
-    // void SWITCH( thread *t1, thread *t2 )
-	//This is a machine-dependent assembly language routine defined
+    // This is a machine-dependent assembly language routine defined 
     // in switch.s.  You may have to think
     // a bit to figure out what happens after this, both from the point
     // of view of the thread and from the perspective of the "outside world".
@@ -124,13 +123,13 @@ Scheduler::Run (Thread *nextThread)
     // point, we were still running on the old thread's stack!
     if (threadToBeDestroyed != NULL) {
         delete threadToBeDestroyed;
-	    threadToBeDestroyed = NULL;
+	threadToBeDestroyed = NULL;
     }
     
 #ifdef USER_PROGRAM
     if (currentThread->space != NULL) {		// if there is an address space
         currentThread->RestoreUserState();     // to restore, do it.
-	    currentThread->space->RestoreState();
+	currentThread->space->RestoreState();
     }
 #endif
 }

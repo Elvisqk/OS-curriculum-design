@@ -5,7 +5,7 @@
 #ifdef HOST_ALPHA		/* Needed because of gcc uses 64 bit long  */
 #define _long int		/* integers on the DEC ALPHA architecture. */
 #else
-#define _long int
+#define _long int /*原为#define _long long*/
 #endif
 
 struct filehdr {

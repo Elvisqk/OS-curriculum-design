@@ -16,8 +16,8 @@ extern "C" {
 #define ASSERT(expression)  assert(expression)
 }
 
-#include <iostream>
-using namespace std;
+#include<iostream>  // 原为#include <iostream.h>
+using namespace std;// 新增代码
 #include "copyright.h"
 #include "templatestack.h"
 

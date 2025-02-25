@@ -23,6 +23,7 @@
 
 #include "directory.h"
 
+
 #define TransferSize 	10 	// make it small, just to be difficult
 
 //----------------------------------------------------------------------
@@ -285,7 +286,7 @@ Print(char *name)
 #define FileName 	"TestFile"
 #define Contents 	"1234567890"
 #define ContentSize 	strlen(Contents)
-#define FileSize 	((int)(ContentSize * 50))
+#define FileSize 	((int)(ContentSize * 5000))
 
 static void 
 FileWrite()
@@ -295,7 +296,7 @@ FileWrite()
 
     printf("Sequential write of %d byte file, in %d byte chunks\n", 
 	FileSize, ContentSize);
-    if (!fileSystem->Create(FileName, FileSize)) {
+    if (!fileSystem->Create(FileName, 0)) {
       printf("Perf test: can't create %s\n", FileName);
       return;
     }
@@ -306,7 +307,7 @@ FileWrite()
     }
     for (i = 0; i < FileSize; i += ContentSize) {
         numBytes = openFile->Write(Contents, ContentSize);
-        if (numBytes < 10) {
+	if (numBytes < 10) {
 	    printf("Perf test: unable to write %s\n", FileName);
 	    delete openFile;
 	    return;

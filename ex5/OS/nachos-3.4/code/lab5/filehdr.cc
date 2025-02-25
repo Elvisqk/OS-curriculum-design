@@ -26,7 +26,6 @@
 
 #include "system.h"
 #include "filehdr.h"
-#define NumDirector 30
 //----------------------------------------------------------------------
 // FileHeader::Allocate
 // 	Initialize a fresh file header for a newly created file.
@@ -37,16 +36,18 @@
 //	"freeMap" is the bit map of free disk sectors
 //	"fileSize" is the bit map of free disk sectors
 //----------------------------------------------------------------------
+
+//新增代码9行，实现FileHeader::FileHeader
 FileHeader::FileHeader()
 { 
     numBytes=0;      
     numSectors=0;     
     //文件大小 
     //文件扇区数 
-    for (int i=0;i<NumDirector;i++)  // NumDirector=30：文件最多拥有的扇区数 
+    for (int i=0;i<NumDirect;i++)  // NumDirector=30：文件最多拥有的扇区数 
         dataSectors[i]=0;  //文件扇区索引表 
 }
-
+//新增代码32行，实现FileHeader::Allocate
 bool FileHeader::Allocate(BitMap *freeMap, int fileSize, int incrementBytes)  { 
     if (numSectors > 30)    //限定每个文件最多可分配30个扇区 
        return false;        //超出限定的文件大小（文件最大限定128*30个字节） 

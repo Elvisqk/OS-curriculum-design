@@ -338,7 +338,9 @@ FileSystem::Print()
     delete dirHdr;
     delete freeMap;
     delete directory;
-} 
+}
+
+//新增代码9行 实现了函数getBitMap和setBitMap
 BitMap* FileSystem::getBitMap() { 
     //numSector: DISK 上总扇区数（共有32*32=1024个扇区） 
     BitMap *freeBitMap = new BitMap(NumSectors);   

@@ -77,7 +77,6 @@ class Lock {
 					// holds this lock.  Useful for
 					// checking in Release, and in
 					// Condition variable ops below.
-    // 如果当前线程持有此锁，则为True。用于检查下面的释放和条件变量操作。
 
   private:
     char* name;				// for debugging

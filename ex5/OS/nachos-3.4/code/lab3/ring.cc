@@ -99,14 +99,12 @@ int
 Ring::Empty()
 {
 // to be implemented
-return in == out;
 }
 
 int
 Ring::Full()
 {
 // to be implemented
-return out == (in + 1) % size;
 }
 
 

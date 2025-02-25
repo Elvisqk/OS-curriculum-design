@@ -17,9 +17,9 @@ endef
 # These definitions may change as the software is updated.
 # Some of them are also system dependent
 CPP=/lib/cpp
-CC = g++  -m32
-LD = g++  -m32
-AS = as  --32
+CC = g++ -m32 # 增加-m32
+LD = g++ -m32 # 增加-m32
+AS = as --32 # 增加32
 
 uname = $(shell uname)
 

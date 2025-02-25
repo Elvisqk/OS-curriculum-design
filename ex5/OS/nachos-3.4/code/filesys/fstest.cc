@@ -111,7 +111,7 @@ Print(char *name)
 #define FileName 	"TestFile"
 #define Contents 	"1234567890"
 #define ContentSize (int)strlen(Contents)
-#define FileSize 	((int)(ContentSize * 5000))
+#define FileSize 	((int)(ContentSize * 50))// 修改代码，原为#define FileSize 	((int)(ContentSize * 5000))
 
 static void 
 FileWrite()
@@ -121,7 +121,7 @@ FileWrite()
 
     printf("Sequential write of %d byte file, in %d byte chunks\n", 
 	FileSize, ContentSize);
-    if (!fileSystem->Create(FileName, 0)) {
+    if (!fileSystem->Create(FileName, FileSize)) { //修改代码，原为if (!fileSystem->Create(FileName, 0))
       printf("Perf test: can't create %s\n", FileName);
       return;
     }

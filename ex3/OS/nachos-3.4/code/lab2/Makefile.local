@@ -26,7 +26,8 @@ CCFILES = main.cc\
 	timer.cc
 
 INCPATH += -I../lab2 -I../threads -I../machine
-
+//INCPATH += -I- -I../lab2 -I../threads -I../machine
 DEFINES += -DTHREADS
+#$(warning $(DEFINES)) 
 
 endif # MAKEFILE_THREADS_LOCAL

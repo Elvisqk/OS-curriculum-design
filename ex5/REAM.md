@@ -12,8 +12,7 @@ code/lab5/main.cc 模块中新添加了三个Nachos 文件系统命令：
 (c)nachos [-d f] -nap Nachos_filename1 Nachos_filename1  
 该命令的功能是将一个Nachos 文件(unix_filename1)附加到一个 Nachos 文件(nachos_filename2)的后面，目的是用来测试当我们在一个Nachos的文件尾部写入数据时，文件大写是否会增加； 
 该命令调用了fstest.cc 中的NAppend(…)函数。 
-注意：只有你在OpenFile类中自己编写代码实现了函数WriteBack()的功能，并
-在这两个函数 Append(…)与 NAppend(…)中去掉语句//openFile->WriteBack();或// openFileTo->WriteBack();注释，上述三个命令才能正常执行。
+注意：只有你在OpenFile类中自己编写代码实现了函数WriteBack()的功能，并在这两个函数 Append(…)与 NAppend(…)中去掉语句//openFile->WriteBack();或// openFileTo->WriteBack();注释，上述三个命令才能正常执行。
 # 记录3
 (1)需要修改哪些模块，需要使用哪些不需要修改的模块；  
 需要修改的模块：  

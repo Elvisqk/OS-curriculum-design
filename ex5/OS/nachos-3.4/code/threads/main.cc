@@ -8,7 +8,6 @@
 //
 // 	Most of this file is not needed until later assignments.
 //
-// 可用的参数列表
 // Usage: nachos -d <debugflags> -rs <random seed #>
 //		-s -x <nachos file> -c <consoleIn> <consoleOut>
 //		-f -cp <unix file> <nachos file>
@@ -90,30 +89,12 @@ main(int argc, char **argv)
 					// for a particular command
 
     DEBUG('t', "Entering main");
-    (void) Initialize(argc, argv);// 参见（../threads/system.cc）
-	/*
-	1、处理Nachos内核所使用的一些命令行参数；
-	2、根据需要创建了Nachos相应的硬件设备，如中断控制器，定时器、CPU、硬盘；
-	3、然后基于这些设备初始化了一个Nachos的内核；
-		初始化了一个线程调度程序；
-		在 Nachos 模拟的硬盘上创建了一个文件系统；
-		创建了Nachos 的主线程（Nachos的第一个线程）；
-		网络通信使用的邮箱等；
-	4、讨论：main线程创建后，后续的的线程是如何创建的？
-		答：直觉猜测：后续线程均有main线程操作
-	*/
+    (void) Initialize(argc, argv);
     
 #ifdef THREADS
-    //ThreadTest();// （参见../threads/thresdtest.cc）
-	// 主线程执行SimpleThread(0)，子线程执行 SimpleThread(1)，
-	// 由于 SimpleThread()调用了Thread::Yield()，因此两个线程会交替执行；
-	// 主线程作为线程0，线程1
-	// 创建一个分支线程1，两个线程交替执行五遍循环
-	// 虽然这部分是暗的，但是实际上发现这个函数执行了，目前不清楚哪里define了THERADS，待更新
+    //ThreadTest(); //已被注释
 #if 0
     SynchTest();
-	// SynchTest()测试Nachos的locks及condition variables实现的线程之间进行互斥与同步功能
-	// 将0改为1，这个函数可以执行，不改不执行
 #endif 
 #endif
 
@@ -172,27 +153,7 @@ main(int argc, char **argv)
 #endif // NETWORK
     }
 
-    currentThread->Finish();	// （参见../threads/thread.cc）
-	// 终止主线程
-	/*
-	我们注意到，Thread::Finish()调用了 Thread::Sleep()，引起线程调度，如果此时就绪队列中尚有就绪
-	进程，则调度执行之；
-	当该就绪线程执行结束后，也会自动执行Thread::Finish()，致使所有的就绪线程都会被依次调度执行；
-	注：每一个线程的所有子线程结束后，该线程才会结束，这是一个递归过程
-	*/
-	/*
-	如果主线程执行Thread::Finish()时就绪队列为空，或者最后一个就绪线程执行结
-	束后终止，都会调用Thread::Sleep()，进而循环调用Interrupt:Idle()，当所有的中断请
-	求都被处理完后，依然没有就绪线程等待调度，则Interrupt:Idle()调用Interrupt:Halt()
-	关闭退出Nachos。
-	*/
-	/*
-	Interrupt:Halt()调用 Cleanup()，将启动时创建的设备（中断控制器、定时器、硬
-	盘、CPU），及文件系统、调度程序等一并删除后退出，至此Nachos运行结束。（参
-	见../threads/system.cc）
-	注：目前来推断，Halt()函数应该无需改动，这里理解就好，如果后续需要改动，该"注"会被删除
-	*/
-				// NOTE: if the procedure "main" 
+    currentThread->Finish();	// NOTE: if the procedure "main" 
 				// returns, then the program "nachos"
 				// will exit (as any other normal program
 				// would).  But there may be other

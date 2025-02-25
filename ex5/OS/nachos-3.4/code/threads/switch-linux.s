@@ -72,8 +72,8 @@ ThreadRoot:
 /* void SWITCH( thread *t1, thread *t2 )
 **
 ** on entry, stack looks like this:
-**      8(esp)  ->              thread *t2  nextThread下一个线程
-**      4(esp)  ->              thread *t1  oldThread旧线程
+**      8(esp)  ->              thread *t2
+**      4(esp)  ->              thread *t1
 **       (esp)  ->              return address
 **
 ** we push the current eax on the stack so that we can use it as
@@ -86,7 +86,6 @@ ThreadRoot:
 SWITCH:
         movl    %eax,_eax_save          # save the value of eax
         movl    4(%esp),%eax            # move pointer to t1 into eax
-        # 执行完这步后，eax中存储的是t1，也就是旧线程的地址
         movl    %ebx,_EBX(%eax)         # save registers
         movl    %ecx,_ECX(%eax)
         movl    %edx,_EDX(%eax)
@@ -100,7 +99,7 @@ SWITCH:
         movl    %ebx,_PC(%eax)          # save it into the pc storage
 
         movl    8(%esp),%eax            # move pointer to t2 into eax
-        # 执行完这步后，eax中存储的是t2，也就是下一个线程的地址
+
         movl    _EAX(%eax),%ebx         # get new value for eax into ebx
         movl    %ebx,_eax_save          # save it
         movl    _EBX(%eax),%ebx         # retore old registers
@@ -111,7 +110,6 @@ SWITCH:
         movl    _EBP(%eax),%ebp
         movl    _ESP(%eax),%esp         # restore stack pointer
         movl    _PC(%eax),%eax          # restore return address into eax
-        # 执行完这步后，eax中存储的是SWITCH()的返回地址
 #       movl    %eax,4(%esp)            # copy over the ret address on the stack
         movl    %eax,0(%esp)    
 	#This is a bug, the offset for return address should be 0, not 4.

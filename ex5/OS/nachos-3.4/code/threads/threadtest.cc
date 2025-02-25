@@ -29,7 +29,6 @@ SimpleThread(_int which)
     for (num = 0; num < 5; num++) {
 	printf("*** thread %d looped %d times\n", (int) which, num);
         currentThread->Yield();
-        // yield 的主要作用是让当前线程在合适的时机放弃 CPU 时间片，允许操作系统调度其他线程运行。
     }
 }
 
@@ -44,10 +43,9 @@ ThreadTest()
 {
     DEBUG('t', "Entering SimpleTest");
 
-    Thread *t = new Thread("forked thread"); // 创建子线程
+    Thread *t = new Thread("forked thread");
 
     t->Fork(SimpleThread, 1);
-    // 让t线程去执行函数，第一个参数为“执行函数”，第二个参数为“执行函数”所需的参数
     SimpleThread(0);
 }
 

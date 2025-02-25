@@ -37,7 +37,9 @@
 
 #include "copyright.h"
 #include "openfile.h"
-#include"bitmap.h"
+
+#include"bitmap.h"//新增代码 包含BitMap类
+
 #ifdef FILESYS_STUB
  		// Temporarily implement file system calls as 
 		// calls to UNIX, until the real file system
@@ -86,10 +88,9 @@ class FileSystem {
 
     void Print();			// List all the files and their contents
 	
-	void setBitMap(BitMap* freeMap);// 新增函数
-	// 获取空闲块位示图文件	
-	BitMap* getBitMap(); // 新增函数
-	// 写回硬盘原来的扇区
+	void setBitMap(BitMap* freeMap);//新增代码 获取空闲块位示图文件	
+	
+	BitMap* getBitMap(); //新增函数 写回硬盘原来的扇区
 
 private:
    OpenFile* freeMapFile;		// Bit map of free disk blocks,

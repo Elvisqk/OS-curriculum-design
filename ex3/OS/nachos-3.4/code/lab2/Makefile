@@ -12,6 +12,8 @@ define MAKEFILE_THREADS
 yes
 endef
 
+$(warning,($yes))
+
 include Makefile.local
 include ../Makefile.common
 
