@@ -12,6 +12,32 @@
 
 #include "syscall.h"
 static int a[40];//新增代码，分配更大的地址空间
+#define TEST_FILE "testfile"    // 测试文件名
+#define TEST_CONTENT "Hello Nachos File System!"  // 测试文件内容
+#define BUF_SIZE 256           // 缓冲区大小
+// //-------------------------------------
+// // 测试函数2：进程控制（Exec/Join/Exit）
+// //-------------------------------------
+// void ChildProcess() {
+//     Write("Child Process Running\n", 22, ConsoleOutput);
+//     Exit(0);  // 子进程正常退出
+// }
+
+// void TestProcessControl() {
+//     SpaceId pid;
+//     int exitStatus;
+
+//     // 启动子进程
+//     pid = Exec("test1");  // 假设test1是另一个测试程序
+//     exitStatus = Join(pid);
+
+//     // 验证退出码
+//     if (exitStatus == 0) {
+//         Write("Process Test PASS: Child exited normally\n", 40, ConsoleOutput);
+//     } else {
+//         Write("Process Test FAIL: Unexpected exit code\n", 39, ConsoleOutput);
+//     }
+// }
 int
 main()
 {
@@ -23,11 +49,7 @@ main()
     Write(prompt, 1, "I will shut down!\n");
     Halt();*/
     //新增代码6行 新main函数内容
-    int i,j,k; 
-    k=3; 
-    i=2; 
-    j=i-1; 
-    k=i-j+k; 
+    //TestProcessControl();// 进程控制测试
     Halt();
     /* not reached */
 }

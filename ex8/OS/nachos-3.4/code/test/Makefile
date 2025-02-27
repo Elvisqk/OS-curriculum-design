@@ -51,7 +51,7 @@ LD = $(GCCDIR)ld
 #        one .c file per target, you will have to change stuff below.
 
 # 修改代码，原为targets = halt shell matmult sort，现新增测试函数exec
-targets = halt shell matmult sort exec 
+targets = halt shell matmult sort exec test file exit
 
 # Targest are put in the architecture specific 'bin' dir.
 

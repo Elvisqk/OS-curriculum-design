@@ -134,8 +134,8 @@ class Thread {
     void Terminated();      // 新增代码 增加Terminated函数
     void setExitCode(int Code);   // 新增代码 设置进程的退出码
     int getExitStatus();           // 新增代码 返回进程的退出码
-    SpaceId waitingProcessSpaceId;// 新增代码 等待进程的SpaceId
-    SpaceId UserProgramId;        // 新增代码 用户进程id
+    int waitingProcessSpaceId;// 新增代码 等待进程的SpaceId
+    int UserProgramId;        // 新增代码 用户进程id
     int waitProcessExitCode;      // 新增代码 等待进程的退出码
     int exitCode;                 // 新增代码 进程的退出码
 

@@ -61,9 +61,9 @@ Exit:
 	.globl Exec
 	.ent	Exec
 Exec:
-	addiu $2,$0,SC_Exec	;SC_Exec+$0->$2,其中S0=0, SC_Exec:系统调用号，即$2存放系统调用号
-	syscall				;执行系统调用
-	j	$31				;从系统调用中返回到原程序中继续执行,$31存放的是系统调用的返回地址
+	addiu $2,$0,SC_Exec	// SC_Exec+$0->$2,其中S0=0, SC_Exec:系统调用号，即$2存放系统调用号
+	syscall				// 执行系统调用
+	j	$31				// 从系统调用中返回到原程序中继续执行,$31存放的是系统调用的返回地址
 	.end Exec
 
 	.globl Join
