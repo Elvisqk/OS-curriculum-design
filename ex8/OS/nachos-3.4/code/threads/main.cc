@@ -92,7 +92,7 @@ main(int argc, char **argv)
     (void) Initialize(argc, argv);
     
 #ifdef THREADS
-    //ThreadTest(); //已被注释
+    ThreadTest(); //已被注释
 #if 0
     SynchTest();
 #endif 
