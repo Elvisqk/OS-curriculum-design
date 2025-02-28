@@ -18,10 +18,6 @@ Interrupt *interrupt;			// interrupt status
 Statistics *stats;			// performance metrics
 Timer *timer;				// the hardware timer device,
 					// for invoking context switches
-#define MAX_USERPROCESSES 256               // 新增代码 定义最大进程用户数量
-BitMap *ProBitmap;                          // 新增代码 管理空闲帧
-bool ThreadMap[MAX_USERPROCESSES];          // 新增代码管理进程的spaceId
-AddrSpace* AddrSpaces[MAX_USERPROCESSES];   // 新增代码 进程地址空间数组
 
 #ifdef FILESYS_NEEDED
 FileSystem  *fileSystem;

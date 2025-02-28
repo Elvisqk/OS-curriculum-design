@@ -43,7 +43,6 @@
 #ifdef USER_PROGRAM
 #include "machine.h"
 #include "addrspace.h"
-#include "list.h" // 新增代码 为了包含List类
 #endif
 
 
@@ -59,7 +58,7 @@
 
 
 // Thread state
-enum ThreadStatus { JUST_CREATED, RUNNING, READY, BLOCKED ,TERNINATED};// 修改代码，原为enum ThreadStatus { JUST_CREATED, RUNNING, READY, BLOCKED };
+enum ThreadStatus { JUST_CREATED, RUNNING, READY, BLOCKED };
 
 // external function, dummy routine whose sole job is to call Thread::Print
 extern void ThreadPrint(_int arg);	 
@@ -103,7 +102,7 @@ class Thread {
     void setStatus(ThreadStatus st) { status = st; }
     char* getName() { return (name); }
     void Print() { printf("%s, ", name); }
-  
+
   private:
     // some of the private data for this class is listed above
     
@@ -111,7 +110,7 @@ class Thread {
 					// NULL if this is the main thread
 					// (If NULL, don't deallocate stack)
     ThreadStatus status;		// ready, running or blocked
-    char name[50];// 修改代码 原为char* name;
+    char* name;
 
     void StackAllocate(VoidFunctionPtr func, _int arg);
     					// Allocate a stack for thread.
@@ -124,20 +123,9 @@ class Thread {
 
     int userRegisters[NumTotalRegs];	// user-level CPU register state
 
-
-
   public:
     void SaveUserState();		// save user-level register state
     void RestoreUserState();		// restore user-level register state
-
-    void Join(int SpaceId); // 新增代码 增加Join函数
-    void Terminated();      // 新增代码 增加Terminated函数
-    void setExitCode(int Code);   // 新增代码 设置进程的退出码
-    int getExitStatus();           // 新增代码 返回进程的退出码
-    int waitingProcessSpaceId;// 新增代码 等待进程的SpaceId
-    int UserProgramId;        // 新增代码 用户进程id
-    int waitProcessExitCode;      // 新增代码 等待进程的退出码
-    int exitCode;                 // 新增代码 进程的退出码
 
     AddrSpace *space;			// User code this thread is running.
 #endif

@@ -58,14 +58,9 @@ class List {
     void SortedInsert(void *item, int sortKey);	// Put item into list
     void *SortedRemove(int *keyPtr); 	  	// Remove first item from list
 
-    int ListLength();		    // 新增代码 返回列表元素的个数
-    void* GetItem(int i);   // 新增代码 返回第i个列表元素
-    void Remove(void *item);// 新增代码 删除第i个列表元素
-
   private:
     ListElement *first;  	// Head of the list, NULL if list is empty
     ListElement *last;		// Last element of list
-    int num;			          // 新增代码 列表元素的个数
 };
 
 #endif // LIST_H

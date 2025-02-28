@@ -19,7 +19,6 @@
 #include "system.h"
 #include "addrspace.h"
 #include "noff.h"
-#include "bitmap.h"// 新增代码 为了包含BitMap类
 
 //----------------------------------------------------------------------
 // SwapHeader
@@ -58,7 +57,6 @@ SwapHeader (NoffHeader *noffH)
 //	"executable" is the file containing the object code to load into memory
 //----------------------------------------------------------------------
 
-/*注释代码 原AddrSpace，因为需要改的有点多，干脆把原函数注释起来再写个新的
 AddrSpace::AddrSpace(OpenFile *executable)
 {
     NoffHeader noffH;
@@ -116,91 +114,6 @@ AddrSpace::AddrSpace(OpenFile *executable)
     }
 
 }
-*/
-
-// 新增代码121~205行 新AddrSpace
-AddrSpace::AddrSpace(OpenFile *executable)
-{
-    NoffHeader noffH;
-    unsigned int i, size;
-
-    executable->ReadAt((char *)&noffH, sizeof(noffH), 0);// 获取noffh文件头
-    // 下边这个文件应该是确认该文件为noff的，不用改
-    if ((noffH.noffMagic != NOFFMAGIC) && 
-		(WordToHost(noffH.noffMagic) == NOFFMAGIC))
-    	SwapHeader(&noffH);
-    ASSERT(noffH.noffMagic == NOFFMAGIC);
-
-// how big is address space?计算地址空间大小
-    size = noffH.code.size + noffH.initData.size + noffH.uninitData.size 
-			+ UserStackSize;	// we need to increase the size
-						// to leave room for the stack
-    numPages = divRoundUp(size, PageSize);
-    size = numPages * PageSize;
-
-    ASSERT(numPages <= NumPhysPages);		// check we're not trying
-						// to run anything too big --
-						// at least until we have
-						// virtual memory
-
-    bool hasAvailabePid = false; 
-    // 寻找一个防止头文件的页
-    for(int i = 100; i < MAX_USERPROCESSES; i++) {
-        if(!ThreadMap[i]){ 
-            ThreadMap[i] = true;                   
-            spaceId = i;  //may be should reserved 0-99 for kernel Process,even though there is no any process at present 
-           hasAvailabePid = true;  //ther is available Pid for new process
-           AddrSpaces[spaceId] = this;
-           break;
-        }
-    }// for
-    if (!hasAvailabePid)   //no available Pid for new process 
-    { 
-        printf("Too many processes in Nachos!\n"); 
-        return; 
-    }
-    
-    if(ProBitmap == NULL)   //used for free frames 
-        ProBitmap = new BitMap(NumPhysPages); 
-    //the remaining code  
-    //set up a new PageTable for a process, first, set up the translation  
-    DEBUG('a', "Initializing address space, num pages %d, size %d\n",numPages, size);
-    pageTable = new TranslationEntry[numPages]; 
-    for (int i = 0; i < numPages; i++) { 
-        pageTable[i].virtualPage = i;   // virtual page # 
-        pageTable[i].physicalPage = ProBitmap->Find();  // find a free frame 
-        ASSERT(pageTable[i].physicalPage!=-1); 
-        pageTable[i].valid = TRUE; 
-        pageTable[i].use = FALSE; 
-        pageTable[i].dirty = FALSE; 
-        pageTable[i].readOnly = FALSE;  // if the code segment was entirely on  
-                                        // a separate page, we could set its  
-                                        // pages to be read-only 
-    }
-
-// zero out the entire address space, to zero the unitialized data segment 
-// and the stack segment
-    bzero(machine->mainMemory, size);
-
-// then, copy in the code and data segments into memory
-    if (noffH.code.size > 0) {
-        int Phynum = pageTable[noffH.code.virtualAddr / PageSize].physicalPage * PageSize;
-        int offset = noffH.code.virtualAddr % PageSize;
-        DEBUG('a', "Initializing code segment, at 0x%x, size %d\n", 
-			Phynum + offset, noffH.code.size);
-        executable->ReadAt(&(machine->mainMemory[Phynum + offset]),
-			noffH.code.size, noffH.code.inFileAddr);
-    }
-    if (noffH.initData.size > 0) {
-        int Phynum = pageTable[noffH.code.virtualAddr / PageSize].physicalPage * PageSize;
-        int offset = noffH.code.virtualAddr % PageSize;
-        DEBUG('a', "Initializing data segment, at 0x%x, size %d\n", 
-			Phynum + offset, noffH.initData.size);
-        executable->ReadAt(&(machine->mainMemory[Phynum + offset]),
-			noffH.initData.size, noffH.initData.inFileAddr);
-    }
-}
-
 
 //----------------------------------------------------------------------
 // AddrSpace::~AddrSpace
@@ -209,11 +122,6 @@ AddrSpace::AddrSpace(OpenFile *executable)
 
 AddrSpace::~AddrSpace()
 {
-    // 新增代码4行
-    ThreadMap[spaceId] = 0; //false 
-    for (int i = 0; i < numPages; i++) { 
-        ProBitmap->Clear(pageTable[i].physicalPage); 
-    } 
    delete [] pageTable;
 }
 
@@ -274,7 +182,7 @@ void AddrSpace::RestoreState()
     machine->pageTableSize = numPages;
 }
 
-// 新增代码10行
+//新增代码10行
 void AddrSpace::Print()
 {
     printf("page table dump:  %d pages  in total\n", numPages);  
@@ -284,9 +192,4 @@ void AddrSpace::Print()
     printf("\t %d, \t\t%d\n", pageTable[i].virtualPage, pageTable[i].physicalPage); 
     } 
     printf("============================================\n\n"); 
-}
-
-// 新增代码3行 
-int AddrSpace::GetSpaceId(){
-    return spaceId;
 }

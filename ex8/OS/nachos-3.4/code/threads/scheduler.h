@@ -13,8 +13,6 @@
 #include "list.h"
 #include "thread.h"
 
-#include"syscall.h" // 新增代码 包含SpaceId变量(其实就是int)
-
 // The following class defines the scheduler/dispatcher abstraction -- 
 // the data structures and operations needed to keep track of which 
 // thread is running, and which threads are ready but not running.
@@ -30,17 +28,9 @@ class Scheduler {
     void Run(Thread* nextThread);	// Cause nextThread to start running
     void Print();			// Print contents of ready list
     
-    List* getWaitingList();    // 新增代码 返回等待进程队列
-    List* getReadyList();      // 新增代码 返回就绪进程队列
-    List* getTerminatedList(); // 新增代码 返回终止进程队列
-    void deleteTerminatedThread(SpaceId spaceID);     // 新增代码 删除停止运行的进程
-    void emptyList(List *list);                       // 新增代码 清空进程队列
-
   private:
     List *readyList;  		// queue of threads that are ready to run,
 				// but not running
-    List *waitingList;      // 新增代码 等待队列
-    List *terminatedList;   // 新增代码 终止队列
 };
 
 #endif // SCHEDULER_H

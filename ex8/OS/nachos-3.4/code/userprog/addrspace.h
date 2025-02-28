@@ -15,10 +15,9 @@
 
 #include "copyright.h"
 #include "filesys.h"
-#include"syscall.h"
 
 #define UserStackSize		1024 	// increase this as necessary!
- 
+
 class AddrSpace {
   public:
     AddrSpace(OpenFile *executable);	// Create an address space,
@@ -32,15 +31,13 @@ class AddrSpace {
     void SaveState();			// Save/restore address space-specific
     void RestoreState();		// info on a context switch 
 
-    void Print();       // 新增代码 输出程序的页表
-    int GetSpaceId();   // 新增代码 获取进程spaceId
+    void Print();//新增代码 输出程序的页表
 
   private:
     TranslationEntry *pageTable;	// Assume linear page table translation
 					// for now!
     unsigned int numPages;		// Number of pages in the virtual 
 					// address space
-    int spaceId;// 新增代码 声明pid
 };
 
 #endif // ADDRSPACE_H

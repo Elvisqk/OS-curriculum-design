@@ -19,7 +19,6 @@
 #include "switch.h"
 #include "synch.h"
 #include "system.h"
-#include "list.h"// 新增代码 为了包含List类
 
 #define STACK_FENCEPOST 0xdeadbeef	// this is put at the top of the
 					// execution stack, for detecting 
@@ -35,7 +34,7 @@
 
 Thread::Thread(char* threadName)
 {
-    strcpy(name,threadName);// 修改代码 原为name = threadName;
+    name = threadName;
     stackTop = NULL;
     stack = NULL;
     status = JUST_CREATED;
@@ -145,7 +144,7 @@ Thread::CheckOverflow()
 //	between setting threadToBeDestroyed, and going to sleep.
 //----------------------------------------------------------------------
 
-/* 注释代码 原Finish函数
+//
 void
 Thread::Finish ()
 {
@@ -157,41 +156,6 @@ Thread::Finish ()
     threadToBeDestroyed = currentThread;
     Sleep();					// invokes SWITCH
     // not reached
-}*/
-
-// 修改代码33行 新Thread::Finish函数
-int waitingThreadExitCode;
-void Thread::Finish () 
-{ 
-    (void) interrupt->SetLevel(IntOff);   
-    ASSERT(this == currentThread); 
-#ifdef USER_PROGRAM 
-    waitingThreadExitCode = currentThread->getExitStatus(); 
-    //joinee finised, wakeup the join user program   
-    List *ReadyList = scheduler->getReadyList(); 
-    List *waitingList = scheduler->getWaitingList(); 
-    Thread *waitingThread;
-    
-    // if joiner is sleeping and in waitinglist, joinee wait up joiner 
-    // when joinee finish  
-    int listLength = waitingList->ListLength();   
-    for (int i = 1; i <= listLength; i++) 
-    {   
-        waitingThread = (Thread *)waitingList->GetItem(i); 
-        if (currentThread->UserProgramId == waitingThread->waitingProcessSpaceId) 
-        { 
-            scheduler->ReadyToRun((Thread *)waitingThread);  
-            waitingList->Remove(waitingThread); 
-            break; 
-        }     
-    } 
-    Terminated(); 
-#else 
-DEBUG('t', "Finishing thread \"%s\"\n", getName());
-   threadToBeDestroyed = currentThread; 
-   Sleep();     // invokes SWITCH 
-   // not reached
-   #endif 
 }
 
 //----------------------------------------------------------------------
@@ -429,86 +393,5 @@ Thread::RestoreUserState()
 {
     for (int i = 0; i < NumTotalRegs; i++)
 	machine->WriteRegister(i, userRegisters[i]);
-}
-#endif
-
-// 新增代码39行 实现Thread::Join函数
-#ifdef USER_PROGRAM
-void Thread::Join(int SpaceId)  { //int join(SpaceId) 
-    IntStatus oldLevel = interrupt->SetLevel(IntOff);   // 关中断
-    currentThread->waitingProcessSpaceId = SpaceId;     // 设置等待进程PID
-    //if joinee is still in not in terminated list? 
-    // 判断等待的进程是否在已终止的队列中
-    Thread *thread; 
-    List *terminatedList = scheduler->getTerminatedList(); 
-    List *waitingList = scheduler->getWaitingList(); 
-    bool interminatedList = FALSE;
-    int listLength = terminatedList->ListLength();  //length of ready queue 
-    for (int i = 1; i <= listLength; i++) 
-    { 
-        thread = (Thread *)terminatedList->GetItem(i); 
-        if (thread == NULL) 
-            interminatedList = FALSE;   // joinee not finished 
-        //joinee is still in Ready queue, not finished 
-        if (thread->UserProgramId == SpaceId)    
-        { 
-            interminatedList = TRUE;  // joinee alreday finished                
-            break; 
-        } 
-        interminatedList = FALSE;   // joinee not finished 
-    } 
-    //Joinee is not finished, still in not in 
-    // terminated List(not at TERMINALTE), 
-    if (!interminatedList)   
-    // still in Nanchos system, maybe at READY or BLOCKED 
-    {      
-        waitingProcessSpaceId = SpaceId;   
-        waitingList->Append((void *)this);   //blocked Joiner 
-        currentThread->Sleep();              
-    } 
-    //joinee alreday finished, in terminated List, empty it, and return 
-    currentThread->waitProcessExitCode = waitingThreadExitCode; 
-    //delete terminated thread "Joinee" 
-    scheduler->deleteTerminatedThread(SpaceId); 
-    interrupt->SetLevel(oldLevel); // 开中断
-    }
-#endif
-
-
-
-// 新增代码21行 实现Thread::Terminated函数
-#ifdef USER_PROGRAM 
-void Thread::Terminated() 
-{ 
-    List *terminatedList = scheduler->getTerminatedList(); 
-
-    Thread *nextThread; 
-    
-    ASSERT(this == currentThread);  // a thread sleep by itsef 
-    ASSERT(interrupt->getLevel() == IntOff); 
-    status = TERNINATED;
-    terminatedList->Append((void *)this);
-
-    nextThread = scheduler->FindNextToRun();   
-    while(nextThread == NULL) 
-    { 
-        interrupt->Idle(); 
-        nextThread = scheduler->FindNextToRun(); 
-    } 
-    scheduler->Run(nextThread); // returns when we've been signalled 
-} 
-#endif
-
-// 新增代码5行 得到退出代码
-#ifdef USER_PROGRAM
-int Thread::getExitStatus(){
-    return exitCode;
-}
-#endif
-
-// 新增代码5行 设置退出代码
-#ifdef USER_PROGRAM
-void Thread::setExitCode(int Code){
-    exitCode = Code;
 }
 #endif

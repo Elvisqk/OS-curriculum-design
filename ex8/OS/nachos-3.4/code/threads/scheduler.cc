@@ -30,8 +30,6 @@
 Scheduler::Scheduler()
 { 
     readyList = new List; 
-    terminatedList = new List;  // 新增代码 初始化终止队列
-    waitingList = new List;     // 新增代码 初始化等待队列
 } 
 
 //----------------------------------------------------------------------
@@ -147,38 +145,4 @@ Scheduler::Print()
 {
     printf("Ready list contents:\n");
     readyList->Mapcar((VoidFunctionPtr) ThreadPrint);
-}
-
-// 新增代码3行 实现Scheduler::getTerminatedList函数
-List *Scheduler::getTerminatedList(){
-    return terminatedList;
-}
-
-// 新增代码3行 实现Scheduler::getWaitingList函数
-List *Scheduler::getWaitingList(){
-    return waitingList;
-}
-
-// 新增代码3行 实现Scheduler::getReadyList函数
-List *Scheduler::getReadyList(){
-    return readyList;
-}
-
-// 新增代码10行 实现Scheduler::deleteTerminatedThread函数
-void Scheduler::deleteTerminatedThread(int SpaceId){
-    int length = terminatedList->ListLength();
-    for(int i = 0; i < length; i++){
-        Thread *thread = (Thread *)terminatedList->GetItem(i);
-        if(thread->UserProgramId == SpaceId){
-            terminatedList->Remove(thread);
-            break;
-        }
-    }
-}
-
-// 新增代码5行 实现Scheduler::emptyList函数
-void Scheduler::emptyList(List *list){
-    int length = list->ListLength();
-    for(int i = 0;i < length;i++)
-        list->Remove();
 }
